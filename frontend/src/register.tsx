@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,20 +12,20 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/login`,
+        `${process.env.REACT_APP_API_BASE_URL}/register`,
         { email, password }
       );
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
-      alert("Login failed");
+      alert("Register failed");
     }
   };
 
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <input
           type="email"
           value={email}
@@ -40,11 +40,7 @@ export default function Login() {
           placeholder="Password"
           required
         />
-        <button type="submit">Login</button>
-        <button type="button" onClick={() => navigate("/register")}>
-          Register
-        </button>{" "}
-        {/* Add the Register button */}
+        <button type="submit">Register</button>
       </form>
     </div>
   );
